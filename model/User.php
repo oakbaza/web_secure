@@ -41,7 +41,7 @@ class User extends db{
 	}
 	
 	public function get_by_username_password(){
-		$sql = "SELECT user_id,user_name
+		$sql = "SELECT user_id,user_name,user_name_tmp
 				FROM user 
 				WHERE user_name = ? AND user_password = ?";
 		$query = $this->db->query($sql,array($this->user_name,$this->user_password));

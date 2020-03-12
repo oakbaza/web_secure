@@ -15,7 +15,8 @@
 		
 		$json_data = file_get_contents($path->url."controller/Api.php?userid=".$_SESSION['user_id']);
 		$user_data = json_decode($json_data);
-		//print_r($user);
+		//print_r($user_data);
+		//print_r($_SESSION);
 	?>
 
 <style>

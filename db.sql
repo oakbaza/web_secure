@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 12, 2020 at 03:22 AM
+-- Generation Time: Mar 12, 2020 at 04:15 PM
 -- Server version: 10.1.25-MariaDB
 -- PHP Version: 5.6.31
 
@@ -21,6 +21,8 @@ SET time_zone = "+00:00";
 --
 -- Database: `projecta`
 --
+CREATE DATABASE IF NOT EXISTS `projecta` DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;
+USE `projecta`;
 
 -- --------------------------------------------------------
 

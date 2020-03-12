@@ -1,5 +1,6 @@
 <?php
-class db {
+include_once("Log.php");
+class db extends Log_file{
 	
 	public $db;
     protected $connection;
@@ -17,11 +18,12 @@ class db {
 	}
 
     public function query($query) {
+		$params = array();
         if (!$this->query_closed) {
             $this->query->close();
         }
 		if ($this->query = $this->connection->prepare($query)) {
-            if (func_num_args() > 1) {
+            if (func_num_args() > 1) { //check array
                 $x = func_get_args();
                 $args = array_slice($x, 1);
 				$types = '';
@@ -38,18 +40,26 @@ class db {
 					}
                 }
 				array_unshift($args_ref, $types);
+				$params = array_slice($args_ref,1);
                 call_user_func_array(array($this->query, 'bind_param'), $args_ref);
             }
             $this->query->execute();
            	if ($this->query->errno) {
 				$this->error('Unable to process MySQL query (check your params) - ' . $this->query->error);
            	}
+			//keep log//	
+			foreach ($params as $value){
+				$query = preg_replace("#\?#", "'" . mysql_real_escape_string($value) . "'", $query,1);
+			}
+			//echo $query;
+			$this->sql = $query;
+			$this->write_log();
+			//keep log//
             $this->query_closed = FALSE;
 			$this->query_count++;
         } else {
             $this->error('Unable to prepare MySQL statement (check your syntax) - ' . $this->connection->error);
         }
-		
 		return $this;
     }
 
