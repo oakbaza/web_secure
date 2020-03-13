@@ -62,8 +62,9 @@ class User extends db{
 				FROM user
 				where user_fname like ? 
 				or user_lname like ? 
-				or concat(user_fname,' ',user_lname) like ?";
-		$query = $this->db->query($sql,array($this->keyword,$this->keyword,$this->keyword));
+				or concat(user_fname,' ',user_lname) like ?
+				or user_name_tmp like ?";
+		$query = $this->db->query($sql,array($this->keyword,$this->keyword,$this->keyword,$this->keyword));
 		return $query;
 	}
 	

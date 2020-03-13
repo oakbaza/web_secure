@@ -854,9 +854,9 @@ Website: http://emilcarlsson.se/
 				success:function(result){
 					load_chat(user_chat_data)
 					//$('<li class="sent"><img src="<?php echo $path->url_image.$user_data->user_picture?>" alt="" /><p>' + message + '</p></li>').appendTo($('.messages ul'));
-					//$('.message-input input').val(null);
+					$('.message-input input').val(null);
 					//$('.contact.active .preview').html('<span>You: </span>' + message);
-					//$(".messages").animate({ scrollTop: $(document).height() }, "fast");
+					$(".messages").animate({ scrollTop: $(document).height() }, "fast");
 				}
 			})
 			

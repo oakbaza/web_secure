@@ -370,3 +370,14 @@
 2020-03-13 11:03:11	localhost	/project/controller/Api.php?userid=7	|	SELECT *
 				FROM user
 				WHERE user_id = '7'	
+2020-03-13 11:03:40	localhost	/project/controller/Api.php?userid=7	|	SELECT *
+				FROM user
+				WHERE user_id = '7'	
+2020-03-13 11:03:46	localhost	/project/controller/Api.php?userid=7	|	SELECT *
+				FROM user
+				WHERE user_id = '7'	
+2020-03-13 11:03:34	localhost	/project/controller/Register.php	|	SELECT user_name
+				FROM user
+				where user_name = 'newuser'	
+2020-03-13 11:03:35	localhost	/project/controller/Register.php	|	INSERT INTO user(user_name,user_name_tmp,user_password,user_fname,user_lname,user_birthdate,user_email,user_address,user_picture,user_picture_old)
+				VALUES('newuser', 'newuser', '123456', 'newuser', 'asdasd', '2020-03-09', 'aokbaza@gmail.com', 'chon', '1584074254.jpeg', 'pic630082.jpg')	
