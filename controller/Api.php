@@ -2,6 +2,7 @@
 include_once('Path.php');
 $path = new Path();
 include_once($path->model.'user.php');
+include_once($path->model.'chat.php');
 $method = $_SERVER['REQUEST_METHOD'];
 session_start();
 
@@ -13,7 +14,7 @@ if($method == "GET"){
 }else if($method == "POST"){
 	if(isset($_POST['search'])){
 		if(!empty($_POST['keyword'])){
-			$keyword = $_POST['keyword'];
+			$keyword = preg_replace('/[^A-Za-z0-9. -]/', '', $_POST['keyword']);;
 			$m_user = new User();
 			$m_user->keyword = $keyword;
 			$result = $m_user->get_user_by_search()->fetchAll();
@@ -35,6 +36,24 @@ if($method == "GET"){
 		}else{
 			echo json_encode("Failed");
 		}
+	}else if(isset($_POST['send_message'])){
+		if(isset($_SESSION['user_id'])){
+			date_default_timezone_set("Asia/Bangkok");
+			$m_chat = new Chat();
+			$m_chat->chat_sender = $_POST['chat_sender'];
+			$m_chat->chat_reciever = $_POST['chat_reciever'];
+			$m_chat->chat_message = htmlspecialchars($_POST['chat_message']);
+			$m_chat->send_message();
+			echo json_encode("success");
+		}else{
+			echo json_encode("error");
+		}
+	}else if($_POST['load_message']){
+		$m_chat = new Chat();
+		$m_chat->chat_sender = $_POST['chat_sender'];
+		$m_chat->chat_reciever = $_POST['chat_reciever'];
+		$data = $m_chat->get_chat()->fetchAll();
+		echo json_encode($data);
 	}else{
 		echo json_encode("error");
 	}

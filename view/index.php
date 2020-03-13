@@ -147,7 +147,7 @@
 									<h3 class="mb-0">New Account</h3>
 								</div>
 								<div class="card-body">
-									<form class="form" id="formLogin"  method="POST" enctype="multipart/form-data" action="../controller/Register.php">
+									<form class="form" id="formRegis"  method="POST" enctype="multipart/form-data" action="../controller/Register.php">
 										<div class="row"> 
 											<div class="input-group mb-3">
 											  <div class="input-group-prepend ">

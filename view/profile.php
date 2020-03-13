@@ -4,7 +4,7 @@
 	<body>
 	<script>
 		$(document).ready(function(){
-			var profile_condition;
+
 			$('.datepicker').datepicker({
 				format:'dd/mm/yyyy'
 			});
@@ -21,43 +21,6 @@
 					$('#icon_pass').addClass( "fa-eye" );
 				}
 			});
-			
-				$('#live-search').on('changed.bs.select', function (e, clickedIndex, isSelected, previousValue) {
-					e.preventDefault();
-					console.log(clickedIndex)
-				});
-	
-			/** SEARCH **/
-			$("#live-search").on('loaded.bs.select',function(){
-				$('.bs-searchbox input').on('keyup', function(e) {
-					e.preventDefault();
-					$('#live-search').selectpicker('refresh');
-						$.ajax({
-							url:"<?php echo $path->url;?>" + "controller/Api.php",
-							dataType:'json',
-							type:'post',
-							data:{
-								'search':true,
-								'keyword':$('.bs-searchbox input').val()
-							},
-							success: function(result){
-							  console.log(result)
-							  if(result.length > 0){
-								  option = ""
-								  for(let i = 0;i<result.length;i++){
-									  option += "<option value="+result[i].user_id+">"+result[i].user_fname+" "+result[i].user_lname+"</option>"
-								  }
-								  $('#live-search').html(option)
-								  $('#live-search').selectpicker('refresh');
-							  }else{
-								  $('#live-search').html("")
-								  $('#live-search').selectpicker('refresh');
-							  }
-							}
-						});
-				});
-			})
-			/** SEARCH **/
 			
 			/** EDIT **/
 			$('#save').click(function(){

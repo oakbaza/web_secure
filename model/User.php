@@ -57,8 +57,8 @@ class User extends db{
 	}
 	
 	public function get_user_by_search(){
-		$this->keyword .= "%";
-		$sql = "SELECT user_id,user_fname,user_lname,user_picture
+		$this->keyword .= empty($this->keyword) ? "" : "%";
+		$sql = "SELECT user_id,user_name_tmp,user_fname,user_lname,user_picture
 				FROM user
 				where user_fname like ? 
 				or user_lname like ? 

@@ -46,11 +46,11 @@ if(isset($_POST['submit'])){
 		$m_user->user_picture_old = $image_old_name;
 		$m_user->insert();
 	}else{
-		$location = 'location: '.$path->url.'view/index.php';
+		$location = 'location: '.$path->url.'view/index.php?error='.$condition['message'];
 		header($location);
 	}
 	
-	$location = 'location: '.$path->url.'view/index.php';
+	$location = 'location: '.$path->url.'view/index.php?success=Success!';
 	header($location);
 }else{
 	$location = 'location: '.$path->url.'view/index.php';

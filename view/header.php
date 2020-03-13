@@ -55,6 +55,41 @@
 		</a>
 	</div>
 </nav> -->
+<script>
+	$(document).ready(function(){
+		/** SEARCH **/
+		$("#live-search").on('loaded.bs.select',function(){
+			$('.bs-searchbox input').on('keyup', function(e) {
+				e.preventDefault();
+				$('#live-search').selectpicker('refresh');
+					$.ajax({
+						url:"<?php echo $path->url;?>" + "controller/Api.php",
+						dataType:'json',
+						type:'post',
+						data:{
+							'search':true,
+							'keyword':$('.bs-searchbox input').val()
+						},
+						success: function(result){
+						  console.log(result)
+						  if(result.length > 0){
+							  option = ""
+							  for(let i = 0;i<result.length;i++){
+								  option += "<option value="+result[i].user_id+">"+result[i].user_fname+" "+result[i].user_lname+"</option>"
+							  }
+							  $('#live-search').html(option)
+							  $('#live-search').selectpicker('refresh');
+						  }else{
+							  $('#live-search').html("")
+							  $('#live-search').selectpicker('refresh');
+						  }
+						}
+					});
+			});
+		})
+		/** SEARCH **/
+	})
+</script>
 <nav class="navbar navbar-dark bg-dark navbar-expand-sm">
   <a class="navbar-brand" href="profile.php">
     <img class="rounded-circle" src="<?php echo $path->url.'pic/chicken.png'?>" width="30" height="30" alt="logo">
@@ -80,12 +115,15 @@
 			</a>
 			<div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
 				<a class="dropdown-item" href="profile.php"><?php echo $user_data->user_name_tmp;?></a>
+				<a class="dropdown-item" href="chat_view.php">Chat</a>
 				<a class="dropdown-item" href="<?php echo $path->url.'controller/Logout.php'?>">Log out</a>
 			</div>
       </li>   
     </ul>
   </div>
 </nav>
+
+
 
                 
 
